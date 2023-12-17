@@ -6,16 +6,21 @@ import { User } from "./user";
 const app = express();
 const httpserver = http.createServer(app);
 
-const server = new ApolloServer({
-  typeDefs: `
-    ${User.typeDefs}
-    `,
+// typeDefs schema
+const typeDefs = `
+  ${User.typeDefs}
+`;
 
-  resolvers: {
-    Query: {
-      ...User.resolvers.Query,
-    },
+// resolvers
+const resolvers = {
+  Query: {
+    ...User.resolvers.Query,
   },
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
 
 export default server;

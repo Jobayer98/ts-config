@@ -1,2 +1,0 @@
-import { typeDefs } from './graphql/typedefs/typeDefs';
-import { resolvers } from './graphql/resolvers/resolvers';
