@@ -1,6 +1,21 @@
 import express from "express";
-const app = express();
-const port = 3001;
+import cors from "cors";
+import { expressMiddleware } from "@apollo/server/express4";
+import server from "./graphql";
 
-app.get("/", (req, res) => res.send("Hello World!"));
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+async function createServer() {
+  const app = express();
+  const PORT = 3000;
+
+  app.use(cors(), express.json());
+
+  await server.start();
+
+  app.use("/graphql", expressMiddleware(server));
+
+  app.listen(PORT, () => {
+    console.log(`Graphql is running on http://localhost:${PORT}`);
+  });
+}
+
+createServer();
